@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add i18n resource -->
+    <resource type="i18n" name="i18n" location="plugin"/>
+
+    <!-- add web resources -->
+    <web-resource key="jira-test-web-resources" name="REST App Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="test-jira.css" location="css/test-jira.css"/>
+    <resource type="download" name="test-jira.js" location="js/test-jira.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>plugin-config</context>
+    </web-resource>
+
+    <!-- add web-sections -->
+    <web-section name="CUSTOM PLUGINS" i18n-name-key="my-web-section.name" key="my-web-section"
+                 location="admin_plugins_menu" weight="1000">
+        <description key="my-web-section.description">The My Web Section Plugin</description>
+        <label key="CUSTOM"/>
+    </web-section>
+    <!-- add web-item -->
+    <web-item key="jira-test-web-item"
+              name="Plugin Config Web Item"
+              section="admin_plugins_menu/my-web-section"
+              weight="200">
+        <label key="REST app"/>
+        <link linkId="jira-test-web-item-link">/plugins/servlet/config</link>
+    </web-item>
+    <!-- add rest base URL -->
+    <rest key="rest" path="/resource" version="1.0">
+        <description>The My Rest Resource Plugin</description>
+    </rest>
+    <!-- add servlets -->
+    <servlet name="Page Servlet" i18n-name-key="page-servlet.name"
+             key="page-servlet"
+             class="ua.finedefinition.jira.servlet.PluginConfigServlet">
+        <url-pattern>/config</url-pattern>
+    </servlet>
+
+</atlassian-plugin>
+

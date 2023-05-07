@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>REST app</title>
+##    It allows to show this html inside of jira UI. Only this html is shown in case you remove it.
+    <meta name="decorator" content="atl.admin">
+    $webResourceManager.requireResource("ua.finedefinition.test-jira:jira-test-web-resources")
+    <script src="./../js/button.js"></script>
+</head>
+<body>
+<form id="plugin-config-form" class="aui">
+
+    <h3>URL</h3>
+    <fieldset class="top-label">
+        <div class="field-group">
+            <label for="someField">Insert URL</label>
+            <input type="text" id="someField" name="someField" class="text">
+        </div>
+    </fieldset>
+
+    <h3>JQL</h3>
+    <fieldset class="top-label">
+        <div class="field-group">
+            <label for="anotherField">Insert JQL query</label>
+            <input type="text" id="anotherField" name="anotherField" class="text">
+        </div>
+    </fieldset>
+
+
+    <div class="field-group">
+    <div class="buttons" >
+        <button class="aui-button aui-button-primary" id="save-plugin-config">SUBMIT</button>
+    </div>
+    </div>
+    <div id="saveConfigResponse"></div>
+</form>
+</body>
+</html>
