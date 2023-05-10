@@ -9,32 +9,47 @@ Your JAVA_HOME variable set <br>
 #### Before first run <br>
 JIRA plugin use maven installing inside pligin package so you need to change path to your Maven directory in your IDE <br>
 
-Path to Maven in MacOS 
-
+Path to Maven in MacOS
 usr/local/Cellar/atlassian-plugin-sdk/8.2.7/libexec/apache-maven-3.5.4 <br>
 
-![Maven settings](images/maven_settings.png)
+`atlas-run`
 
-Create template Jira plugin from SDK:
+#### Searching for issues using POST <br>
+If your JQL query is too large to specify in a URL parameter, you can POST your JQL query (in JSON format) <br>
+to the Jira REST API search resource instead. Any additional URL parameters (apart from the url parameter) <br>
+described above must be included in your JSON-formatted JQL query.<br>
+<br>
+#### Endpoint 
+http://localhost:2990/jira/rest/restresource/1.0/search <br>
+<br>
+#### Request <br>
+{<br>
+"projectKey": "TEST",<br>
+"fields": ["description"],<br>
+"properties": ["project", "issuetype", "assignee"],<br>
+"fieldsByKeys": false,<br>
+"jql": "project = 'TEST' AND issuetype = 'Task' AND assignee = 'admin'",<br>
+"maxResults": 1,<br>
+"startAt": 0,<br>
+"validateQuery": "strict",<br>
+##### "fetchAll": false //this switcher to output without limitation on the number of displays.<br>
+}<br>
+<br>
+#### Response<br>
+{<br>
+"maxResults": 1,<br>
+"startAt": 0,<br>
+"total": 6,<br>
+"expand": "schema,names",<br>
+"issues": [<br>
+{<br>
+"key": "TEST-6",<br>
+"description": "h4. Now it's your turn!\n{color:#707070}Now, it is your turn to create your first task. Click the <br>
+'Create' button and get your project started. {color}\nh4. If you are a JIRA Core administrator, you can create <br>
+....}<br>
 
-#### `atlas-create-jira-plugin`
-
-You also need to install several plugin modules:
-1. Web section / 30
-2. Web item / 25
-3. Webwork plugin / 31
-
-#### `atlas-create-jira-plugin-module`
-
-Web section won't appear on UI until you define at least one web-item in the section.
-
-Add custom Web section and Web item link.
-
-Insert data in fields
-![Plugin view](images/insert_data.png)
-
-Get JSON from input
-![Plugin view](images/rab.png)
+#### Response if switcher fetchAll turn on:
+![](images/response.png)
 
 Full documentation is always available at:
 
